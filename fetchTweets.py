@@ -48,7 +48,7 @@ def queryTwitter(query, lang, output):
 
 def printIt(result):
     print(result);
-    print(result['search_metadata']['count']);
+    print("Tweets found: " + result['search_metadata']['count']);
 
 if __name__ == "__main__":
     main();
