@@ -34,10 +34,16 @@ def main():
     print("Searching....");
     queryTwitter(query, lang, output);
 
+def OutputToFile(output, text):
+    mode = 'a' if os.path.exists(output) else 'w'
+    with open(output, mode) as f:
+        f.write(text);
+    f.close();
+
 def queryTwitter(query, lang, output):
     req = "https://api.twitter.com/1.1/search/tweets.json?";
 
-    # build request - better way of doing this needed will do for now
+    # build request - better way of doing this needed... This will do for now.
     req += "q=" + query;
 
     if (lang.lower() != ""):
@@ -56,7 +62,7 @@ def queryTwitter(query, lang, output):
 
     # check if user wants ouput
     if (output.lower() == "y"):
-        OutputToFile(); # also not implemented should output result to file.
+        OutputToFile(output, tweets); # need to ouput important lines at top of file
 
     # pass output to be printed
     printIt(tweets);
