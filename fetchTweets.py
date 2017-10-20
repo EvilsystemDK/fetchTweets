@@ -8,7 +8,6 @@ CONSUMER_SECRET = "INSERT HERE";
 ACCESS_KEY = "INSERT HERE";
 ACCESS_SECRET = "INSERT HERE";
 
-
 def main():
     # prompt user for input
     query = input("What would you like to search for: ");
@@ -45,11 +44,10 @@ def queryTwitter(query, lang, output):
 
     # build request - better way of doing this needed... This will do for now.
     req += "q=" + query;
-
     if (lang.lower() != ""):
         req += "&" + lang;
 
-    print(req);
+    print("Requesting: %s" %(req));
 
     # query twitter
     consumer = oauth.Consumer(key=CONSUMER_KEY, secret=CONSUMER_SECRET);
@@ -57,7 +55,6 @@ def queryTwitter(query, lang, output):
     client = oauth.Client(consumer, access_token);
 
     response, data = client.request(req);
-
     tweets = json.loads(data.decode('utf-8'));
 
     # check if user wants ouput
@@ -68,8 +65,11 @@ def queryTwitter(query, lang, output):
     printIt(tweets);
 
 def printIt(result):
-    print(result);
+    #print(result); -- debug
     print("Tweets found: " + result['search_metadata']['count']);
+    # add top 5 tweets.
+    print("Compiled in %s secounds..." %(result['search_metadata']['completed_in']));
+
 
 if __name__ == "__main__":
     main();
