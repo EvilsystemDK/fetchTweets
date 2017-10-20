@@ -1,5 +1,6 @@
 import json, requests
 import oauth2 as oauth
+import os
 
 # Customer keys & secret
 CONSUMER_KEY = "INSERT HERE";
@@ -12,12 +13,26 @@ def main():
     # prompt user for input
     query = input("What would you like to search for: ");
     lang = input("Return only from specific country: ");
-    output = input("Whould you like to ouput tweets to a file: (Y/N)");
+    output = input("Whould you like to ouput tweets to a file: (/home/)");
 
-    # review selected options - at some point?
+    # clear terminal
+    os.system("clear");
+
+    # review selected options
+    print ("Please review your selected options below:");
+    print ("Search Twitter for: %s" %(query));
+    if (lang == ""):
+        print ("No country filter set...");
+    else:
+        print ("Country filter: %s" %(lang));
+    print ("Outputting result to: %s" %(output));
+
+    # wait for user
+    input("Pess ENTER to continue...");
+
+    # searching
     print("Searching....");
     queryTwitter(query, lang, output);
-
 
 def queryTwitter(query, lang, output):
     req = "https://api.twitter.com/1.1/search/tweets.json?";
