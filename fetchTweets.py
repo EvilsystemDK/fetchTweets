@@ -61,7 +61,7 @@ def queryTwitter(query, lang, output):
     tweets = json.loads(data.decode('utf-8'));
 
     # check if user wants ouput
-    if (output.lower() == "y"):
+    if (output.lower() != ""):
         OutputToFile(output, tweets); # need to ouput important lines at top of file
 
     # pass output to be printed
